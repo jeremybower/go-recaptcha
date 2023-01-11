@@ -1,0 +1,8 @@
+{
+  "name": "go-recaptcha",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "devtools",
+  "workspaceFolder": "/workspace",
+  "settings": {},
+  "extensions": []
+}

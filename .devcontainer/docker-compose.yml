@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  devtools:
+    image: jeremybower/go-recaptcha-devtools
+    build: ./devtools
+    command: /bin/zsh -c "while sleep 1000; do :; done"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/workspace:cached
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined

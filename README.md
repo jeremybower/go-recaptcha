@@ -1,7 +1,6 @@
 [![Build Status](https://img.shields.io/travis/jeremybower/go-recaptcha/master.svg?style=flat-square)](https://travis-ci.org/jeremybower/go-recaptcha)
 [![Coverage Status](https://img.shields.io/codecov/c/github/jeremybower/go-recaptcha/master.svg?style=flat-square)](https://codecov.io/gh/jeremybower/go-recaptcha)
 
-
 # go-recaptcha
 
 ### About
