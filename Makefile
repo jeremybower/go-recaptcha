@@ -6,7 +6,6 @@ COVERAGE_DIR=${ROOT_DIR}/coverage
 test:
 	@mkdir -p ${COVERAGE_DIR}
 	@go test \
-		-tags="integration unit" \
 		-race \
 		-timeout 120s \
 		-cover \

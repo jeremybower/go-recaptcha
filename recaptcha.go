@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
@@ -95,12 +94,13 @@ func (c *clientImpl) check(remoteip, response string) (*serverResponse, error) {
 		return nil, err
 	}
 
+	const expectedStatusCode = http.StatusOK
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("Unexpected response. Expected 200 but found %d", resp.StatusCode)
+		return nil, fmt.Errorf("unexpected response (expected %d but found %d)", expectedStatusCode, resp.StatusCode)
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(c.opts.ReaderFunc(resp.Body))
+	body, err := io.ReadAll(c.opts.ReaderFunc(resp.Body))
 	if err != nil {
 		return nil, err
 	}
@@ -112,4 +112,20 @@ func (c *clientImpl) check(remoteip, response string) (*serverResponse, error) {
 	}
 
 	return &r, nil
+}
+
+func NewClientForTesting(confirm bool, err error) Client {
+	return &clientForTestingImpl{
+		confirm: confirm,
+		err:     err,
+	}
+}
+
+type clientForTestingImpl struct {
+	confirm bool
+	err     error
+}
+
+func (c *clientForTestingImpl) Confirm(remoteip, response string) (bool, error) {
+	return c.confirm, c.err
 }
